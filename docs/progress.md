@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-10-01 - #20
+
+- **What changed:** dbt Core project skeleton with a local profile, and a CI job that parses the project and tests the connection to the local database.
+- **Scope changes:** none.
+
 ## 2026-10-01 - #18
 
 - **What changed:** `pipeline/` Python project with Ruff, pyright and pytest, and a `python` CI job.
