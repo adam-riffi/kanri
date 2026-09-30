@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!packages/domain/openapi.json"]
+    "includes": ["**", "!packages/domain/openapi.json", "!packages/api-client/src/schema.d.ts"]
   },
   "formatter": {
     "indentStyle": "space",
