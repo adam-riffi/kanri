@@ -3,6 +3,23 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - test/11-playwright-smoke (#12)
+
+**Changes**
+- Added a Playwright smoke test for `apps/web`: `pnpm e2e` builds the app, starts it and checks the home page (title and heading) and `GET /api/v1/health` in Chromium. CI runs it in a separate `e2e` job.
+
+**Scope changes and decisions**
+- `@playwright/test` 1.63.0 is pinned as a dev dependency of `@pm/web`; `Overview.md` lists Playwright as the end-to-end layer.
+- The tests describe behaviour that already existed, so there was no red step on the real code. They were shown to fail by temporarily changing the page title and the health status code.
+- End-to-end files end in `.e2e.ts`, so Vitest's default pattern does not pick them up and `pnpm test` stays free of browsers.
+- The suite runs against the production build (`next build`, then `next start`), like the deployed app.
+- The new job is separate from `typescript`, so the required check for branch protection stays `typescript`; add `e2e` to the required checks if the owner wants it.
+- Not added: report or trace uploads and other browsers; add them when a failure needs them.
+
+**Open questions and next steps**
+- Sign-in, board and page flows wait for their screens and the missing specification tabs.
+- Branch protection on `main` still needs the owner's approval (asked, not yet answered).
+
 ## 2026-10-01 - GitHub Copilot - docs/9-tooling-decisions (#10)
 
 **Changes**

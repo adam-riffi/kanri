@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-10-01 - #12
+
+- **What changed:** Playwright smoke test of the built app (home page and `GET /api/v1/health`) and a CI job that runs it.
+- **Scope changes:** none.
+
 ## 2026-10-01 - #10
 
 - **What changed:** decision records 0008 (TypeScript 6 for the OpenAPI type generator) and 0009 (native type stripping for scripts).
