@@ -10,6 +10,9 @@ playwright-report/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
 *.tsbuildinfo
 *.log
 

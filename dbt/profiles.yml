@@ -1,0 +1,14 @@
+# The local target's defaults are the Supabase CLI's local database, which is public and not a secret.
+# Hosted targets get their own target without defaults; no hosted credential belongs in this repository.
+kanri:
+  target: local
+  outputs:
+    local:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', '127.0.0.1') }}"
+      port: "{{ env_var('DBT_PORT', '54322') | as_number }}"
+      user: "{{ env_var('DBT_USER', 'postgres') }}"
+      password: "{{ env_var('DBT_PASSWORD', 'postgres') }}"
+      dbname: "{{ env_var('DBT_DATABASE', 'postgres') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'analytics') }}"
+      threads: 4
