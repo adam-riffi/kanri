@@ -28,3 +28,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+      - name: Generated files are up to date
+        run: |
+          pnpm generate
+          git diff --exit-code
