@@ -1,0 +1,56 @@
+name: dbt
+
+on:
+  pull_request:
+    paths:
+      - dbt/**
+      - supabase/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/dbt.yml
+  push:
+    branches: [main]
+    paths:
+      - dbt/**
+      - supabase/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/dbt.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dbt-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - uses: astral-sh/setup-uv@v10.2.0
+        with:
+          version: "0.11.19"
+          enable-cache: true
+          cache-dependency-glob: dbt/uv.lock
+      - run: pnpm install --frozen-lockfile
+      - name: Start the local database
+        run: pnpm exec supabase db start
+      - name: Install dbt
+        working-directory: dbt
+        run: uv sync --locked
+      - name: The project parses
+        working-directory: dbt
+        run: uv run dbt parse
+      - name: The profile connects to the local database
+        working-directory: dbt
+        run: uv run dbt debug
