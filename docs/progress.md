@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-10-01 - #10
+
+- **What changed:** decision records 0008 (TypeScript 6 for the OpenAPI type generator) and 0009 (native type stripping for scripts).
+- **Scope changes:** none.
+
 ## 2026-09-30 - #8
 
 - **What changed:** OpenAPI 3.1 document generated from the Zod schemas (committed), generated typed API client, and a CI check that generated files are up to date.

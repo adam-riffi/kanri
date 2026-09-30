@@ -3,6 +3,19 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - docs/9-tooling-decisions (#10)
+
+**Changes**
+- Added decision records 0008 (TypeScript 6 for the OpenAPI type generator) and 0009 (native type stripping for scripts). Both decisions were made in #8 and were only described in this log.
+
+**Scope changes and decisions**
+- Documentation only: no code or configuration changed, so test-first does not apply. The claims in 0009 were checked with Node 24.13.0: plain TypeScript runs, while enums, namespaces and parameter properties are rejected.
+
+**Open questions and next steps**
+- The bootstrap stack is merged (#5 to #8) and CI is green on `main`.
+- Branch protection on `main` still needs the owner's approval.
+- Feature work still waits for the missing specification tabs.
+
 ## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
 
 **Changes**
