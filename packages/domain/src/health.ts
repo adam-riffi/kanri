@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 /** Body of `GET /api/v1/health`. */
-export const healthResponseSchema = z.object({ status: z.literal("ok") });
+export const healthResponseSchema = z
+  .object({ status: z.literal("ok") })
+  .meta({ id: "HealthResponse" });
 
 export type HealthResponse = z.infer<typeof healthResponseSchema>;

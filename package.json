@@ -10,7 +10,8 @@
     "format": "biome format --write .",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
-    "build": "pnpm -r --if-present build"
+    "build": "pnpm -r --if-present build",
+    "generate": "pnpm --filter @pm/domain generate && pnpm --filter @pm/api-client generate"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",

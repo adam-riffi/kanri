@@ -3,6 +3,51 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
+- Merged the bootstrap stack bottom-up with squash merges: #5, #6, #7 and then this pull request. Before each merge the next branch was rebased onto `main` and its pull request retargeted; merged branches were deleted afterwards. Each merged pull request got a comment with a picture.
+
+**Scope changes and decisions**
+- The owner allowed the agent to merge its own stacked pull requests on 2026-10-01. This is an explicit exception to "Never merge your own PR" in `Guidelines.md`; every pull request was ready, self-reviewed and green in CI before its merge (#5 had no CI because the workflow arrived with #6).
+- Squash-merge settings are unchanged: commit title from the pull request title, commit body from the branch's commit messages.
+
+**Open questions and next steps**
+- Branch protection for `main` (pull request and `typescript` check required) is not enabled yet.
+- Feature work is blocked on the Milestones, Data model, API, Screens, Integrations and Operations tabs, which are still missing from the repository.
+
+## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
+- Each pull request description now shows a picture uploaded with `gh pr edit --attach`, so GitHub hosts it like a drag-and-drop attachment. Nothing is committed for it: `/PR/` stays git-ignored and the pull request template has no section for pictures.
+
+**Scope changes and decisions**
+- `--attach` exists from GitHub CLI 2.99.0 (the installed 2.95.0 answers "unknown flag"). A portable 2.102.0, verified against the release checksums and its build attestation, sits in `%LOCALAPPDATA%\gh-portable\bin` and is used only for attachments; the installed gh was not touched.
+- Two earlier attempts were removed: a side branch hosting the pictures (deleted) and pictures committed in the pull requests (commits dropped from the branches).
+
+**Open questions and next steps**
+- Upgrade the installed GitHub CLI (an MSI needs admin rights), then delete `%LOCALAPPDATA%\gh-portable`.
+- For a new picture: `gh pr create --attach 'PR/memes/<file>#<alt text>'` (or `gh pr edit <number> --attach ...`).
+
+## 2026-09-30 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
+- Added the API-first chain: `buildOpenApiDocument()` in `packages/domain` (zod-to-openapi, OpenAPI 3.1), a committed `packages/domain/openapi.json`, and `packages/api-client` with generated types and `createApiClient` (openapi-fetch). Each behaviour was written test-first.
+- CI now runs `pnpm generate` and fails if any tracked file changes.
+
+**Scope changes and decisions**
+- Only `GET /api/v1/health` is described; errors, pagination and authentication wait for the API tab of the specification.
+- The contract (Zod schemas and OpenAPI registry) lives in `packages/domain`, so dependencies run domain, then api-client, then web, with no cycles.
+- Relative imports in `packages/domain` use the `.ts` extension so Node can run the generator natively, which avoids a TypeScript runner dependency (`allowImportingTsExtensions` is set in the base config).
+- `openapi-typescript` needs the TypeScript JS API, which TypeScript 7 does not expose. `@pm/api-client` aliases `typescript` to `@typescript/typescript6` (Microsoft's TypeScript 6 package; its `tsc6` binary does not clash with `tsc`). The repo keeps TypeScript 7 for type-checking, and a `peerDependencyRules` entry records the intentional mismatch. Remove the alias once openapi-typescript supports TypeScript 7.
+- Biome skips the two generated files (`openapi.json`, `schema.d.ts`); the drift test and the CI diff step guard them instead.
+- Zod metadata (`.meta({ id })`) names the OpenAPI component, so `extendZodWithOpenApi` is not needed.
+
+**Open questions and next steps**
+- The bootstrap stack is complete (#5 to #8). Merge bottom-up; after each squash-merge, rebase the next branch onto `main` and retarget its PR.
+- Enable branch protection on `main` with the `typescript` check once #6 is merged (needs approval).
+- Map the M1 issues onto this foundation when the Milestones tab is available; Python, dbt and Supabase are still deferred.
+
 ## 2026-09-30 - GitHub Copilot - feat/3-web-health-endpoint (#7)
 
 **Changes**

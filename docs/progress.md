@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-09-30 - #8
+
+- **What changed:** OpenAPI 3.1 document generated from the Zod schemas (committed), generated typed API client, and a CI check that generated files are up to date.
+- **Scope changes:** none.
+
 ## 2026-09-30 - #7
 
 - **What changed:** Next.js app in `apps/web` with a placeholder home page and `GET /api/v1/health`.

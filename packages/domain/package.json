@@ -6,10 +6,15 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "generate": "node scripts/generate-openapi.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "9.1.0",
     "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.0"
   }
 }
