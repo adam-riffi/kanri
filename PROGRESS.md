@@ -3,6 +3,21 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - chore/15-supabase-local (#16)
+
+**Changes**
+- Added the Supabase CLI (2.118.0, exact pin) as a root dev dependency, `supabase/config.toml` for the local project `kanri`, the scripts `pnpm db:start`, `db:stop` and `db:reset`, and a `Supabase` workflow that starts the local database, runs `supabase db reset` and lints the schema when Supabase files change. Decision 0011 records the choices.
+
+**Scope changes and decisions**
+- 2.119.0 was the latest release, but it was about two hours old: pnpm's release-age policy blocked it and offered an exclusion. The previous release (2.118.0, five days old) passes the policy, so no exclusion was added.
+- The job is not a required check: it is path-filtered, and a skipped required check would block merges (decision 0010).
+- No schema, seed or migration yet: they wait for the Data model tab. Nothing in this pull request needs a token.
+- Docker Desktop cannot start on this machine: its backend reports `hasNoVirtualization: true`. The local stack was therefore not run here, and the `Supabase` job in CI is the only verification. Enabling virtualization needs a BIOS setting and Windows features (administrator rights and a reboot), so it was left to the owner.
+
+**Open questions and next steps**
+- Owner: enable virtualization if the local stack should run on this machine.
+- When the owner has created the hosted project and handed over the tokens: `supabase link`, GitHub secrets set with `gh secret set`, and a job that deploys migrations. Environments wait for the Operations tab.
+
 ## 2026-10-01 - GitHub Copilot - docs/13-protect-main (#14)
 
 **Changes**
