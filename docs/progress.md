@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-10-01 - #14
+
+- **What changed:** branch protection on `main` (pull request and the `typescript` and `e2e` checks required, no force-push or deletion), recorded as decision 0010.
+- **Scope changes:** none.
+
 ## 2026-10-01 - #12
 
 - **What changed:** Playwright smoke test of the built app (home page and `GET /api/v1/health`) and a CI job that runs it.
