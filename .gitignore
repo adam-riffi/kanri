@@ -6,6 +6,10 @@ dist/
 coverage/
 test-results/
 playwright-report/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
 *.tsbuildinfo
 *.log
 

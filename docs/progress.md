@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-10-01 - #18
+
+- **What changed:** `pipeline/` Python project with Ruff, pyright and pytest, and a `python` CI job.
+- **Scope changes:** none.
+
 ## 2026-10-01 - #16
 
 - **What changed:** Supabase CLI and local project configuration, database scripts, and a CI job that applies migrations to a clean local database.

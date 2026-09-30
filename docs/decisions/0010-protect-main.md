@@ -8,7 +8,7 @@ Status: accepted (2026-10-01)
 ## Decision
 Protect `main` with GitHub branch protection, set through the API on 2026-10-01:
 - A pull request is required. No approvals are required, because a single owner cannot approve their own pull requests.
-- The `typescript` and `e2e` checks must pass. The branch need not be up to date with `main`, so a pull request is not blocked when `main` moves on.
+- The `typescript`, `e2e` and `python` checks must pass; each is added to the list when its job lands. The branch need not be up to date with `main`, so a pull request is not blocked when `main` moves on.
 - History stays linear, and force-push and deletion are blocked.
 - The rules apply to administrators too.
 
