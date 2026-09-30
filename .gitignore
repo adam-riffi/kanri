@@ -1,0 +1,18 @@
+# Dependencies and build output
+node_modules/
+.next/
+dist/
+coverage/
+*.tsbuildinfo
+*.log
+
+# Environment files can hold secrets; only the example is tracked
+.env*
+!.env.example
+
+# Local meme pictures for pull requests; never committed
+/PR/
+
+# Operating system files
+.DS_Store
+Thumbs.db
