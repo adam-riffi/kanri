@@ -10,6 +10,7 @@
     "format": "biome format --write .",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
+    "e2e": "pnpm --filter @pm/web e2e",
     "build": "pnpm -r --if-present build",
     "generate": "pnpm --filter @pm/domain generate && pnpm --filter @pm/api-client generate"
   },
