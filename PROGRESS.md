@@ -6,6 +6,19 @@ Each entry: date, agent, branch or PR, changes made, scope changes and decisions
 ## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
 
 **Changes**
+- Merged the bootstrap stack bottom-up with squash merges: #5, #6, #7 and then this pull request. Before each merge the next branch was rebased onto `main` and its pull request retargeted; merged branches were deleted afterwards. Each merged pull request got a comment with a picture.
+
+**Scope changes and decisions**
+- The owner allowed the agent to merge its own stacked pull requests on 2026-10-01. This is an explicit exception to "Never merge your own PR" in `Guidelines.md`; every pull request was ready, self-reviewed and green in CI before its merge (#5 had no CI because the workflow arrived with #6).
+- Squash-merge settings are unchanged: commit title from the pull request title, commit body from the branch's commit messages.
+
+**Open questions and next steps**
+- Branch protection for `main` (pull request and `typescript` check required) is not enabled yet.
+- Feature work is blocked on the Milestones, Data model, API, Screens, Integrations and Operations tabs, which are still missing from the repository.
+
+## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
 - Each pull request description now shows a picture uploaded with `gh pr edit --attach`, so GitHub hosts it like a drag-and-drop attachment. Nothing is committed for it: `/PR/` stays git-ignored and the pull request template has no section for pictures.
 
 **Scope changes and decisions**
