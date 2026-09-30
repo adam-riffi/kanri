@@ -3,6 +3,25 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-09-30 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
+- Added the API-first chain: `buildOpenApiDocument()` in `packages/domain` (zod-to-openapi, OpenAPI 3.1), a committed `packages/domain/openapi.json`, and `packages/api-client` with generated types and `createApiClient` (openapi-fetch). Each behaviour was written test-first.
+- CI now runs `pnpm generate` and fails if any tracked file changes.
+
+**Scope changes and decisions**
+- Only `GET /api/v1/health` is described; errors, pagination and authentication wait for the API tab of the specification.
+- The contract (Zod schemas and OpenAPI registry) lives in `packages/domain`, so dependencies run domain, then api-client, then web, with no cycles.
+- Relative imports in `packages/domain` use the `.ts` extension so Node can run the generator natively, which avoids a TypeScript runner dependency (`allowImportingTsExtensions` is set in the base config).
+- `openapi-typescript` needs the TypeScript JS API, which TypeScript 7 does not expose. `@pm/api-client` aliases `typescript` to `@typescript/typescript6` (Microsoft's TypeScript 6 package; its `tsc6` binary does not clash with `tsc`). The repo keeps TypeScript 7 for type-checking, and a `peerDependencyRules` entry records the intentional mismatch. Remove the alias once openapi-typescript supports TypeScript 7.
+- Biome skips the two generated files (`openapi.json`, `schema.d.ts`); the drift test and the CI diff step guard them instead.
+- Zod metadata (`.meta({ id })`) names the OpenAPI component, so `extendZodWithOpenApi` is not needed.
+
+**Open questions and next steps**
+- The bootstrap stack is complete (#5 to #8). Merge bottom-up; after each squash-merge, rebase the next branch onto `main` and retarget its PR.
+- Enable branch protection on `main` with the `typescript` check once #6 is merged (needs approval).
+- Map the M1 issues onto this foundation when the Milestones tab is available; Python, dbt and Supabase are still deferred.
+
 ## 2026-09-30 - GitHub Copilot - feat/3-web-health-endpoint (#7)
 
 **Changes**
