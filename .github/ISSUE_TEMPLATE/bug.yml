@@ -1,0 +1,24 @@
+name: Bug
+description: Behaviour differs from the specification
+title: "fix(scope): summary"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: The fix starts from a failing test that follows these steps.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behaviour
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
