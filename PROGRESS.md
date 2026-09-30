@@ -3,6 +3,21 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - chore/17-python-tooling (#18)
+
+**Changes**
+- Added `pipeline/` as a uv project (Python 3.14.2, `src` layout, committed `uv.lock`) with Ruff, pyright in strict mode and pytest, and a `python` job in `ci.yml` that runs all four on every pull request. Decision 0012 records the choices.
+
+**Scope changes and decisions**
+- No runtime dependencies yet: httpx, pydantic and LiteLLM come with the first job that needs them. The one test only proves that the package is installed.
+- Red to green: before `src/pipeline/__init__.py` existed, `uv sync` failed with "Expected a Python module at: src\pipeline\__init__.py"; adding it made the test pass. The three checks were shown to fail on a temporary file with an unused import, bad formatting and an untyped function; the file was then removed.
+- Pyright rather than mypy: `Overview.md` names no checker, and Pylance is pyright, so the editor and CI agree. Ruff rules: E, F, W, I, N, UP, B, SIM, C4, PT, RUF.
+- The `python` check is added to the required checks of `main`; decision 0010 was updated to say so.
+
+**Open questions and next steps**
+- Next: the dbt skeleton (dbt Core with the Postgres adapter).
+- The pipeline jobs wait for the Integrations tab.
+
 ## 2026-10-01 - GitHub Copilot - chore/15-supabase-local (#16)
 
 **Changes**
