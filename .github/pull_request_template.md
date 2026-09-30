@@ -18,6 +18,3 @@ Closes #<number>
 
 ## Stack position
 <!-- For example "Stack 2/3 - depends on #41, followed by #43". Write "Not stacked" otherwise. -->
-
-## Meme (optional)
-<!-- Drag the captioned picture here in the GitHub web UI. -->
