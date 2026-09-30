@@ -3,6 +3,20 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - chore/19-dbt-skeleton (#20)
+
+**Changes**
+- Added `dbt/` as a uv project (dbt Core 1.12.5 and the Postgres adapter 1.11.0, exact pins, Python 3.14.2, committed `uv.lock`) with `dbt_project.yml`, an environment-driven `profiles.yml` whose defaults are the local Supabase database, and a `dbt` workflow that starts the local database and runs `dbt parse` and `dbt debug` when dbt or Supabase files change. Decision 0013 records the choices.
+
+**Scope changes and decisions**
+- No model, seed or snapshot yet: they wait for the Data model tab. The default schema `analytics` is a placeholder (`DBT_SCHEMA` overrides it).
+- Red to green: before the project files existed, `dbt parse` failed with "Invalid value for '--profiles-dir'"; with them it exits 0. `dbt debug` accepts both files and reaches the database check, which fails here only because no database runs on this machine (no virtualization, see #16). The `dbt` job in CI runs that connection test against the local Supabase database.
+- The profile's default password is the public default of the Supabase CLI's local database, not a secret. Hosted targets will be separate targets without defaults; no hosted credential goes into the repository.
+- The job is not a required check because it is path-filtered (decision 0010).
+
+**Open questions and next steps**
+- The models, their dbt tests and the hosted targets wait for the Data model and Operations tabs and the owner's tokens.
+
 ## 2026-10-01 - GitHub Copilot - chore/17-python-tooling (#18)
 
 **Changes**
