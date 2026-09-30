@@ -3,6 +3,20 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - docs/13-protect-main (#14)
+
+**Changes**
+- Enabled branch protection on `main` through the GitHub API and recorded it in decision record 0010: pull request required (no approvals), `typescript` and `e2e` checks required, linear history, no force-push or deletion, rules apply to administrators.
+
+**Scope changes and decisions**
+- The owner wrote "you can setup everything on your end, i'll give you the supabase tokens when i'll setup the project", which covers the approval that was pending since #6.
+- `strict` (branch up to date with `main`) is off so a pull request is not blocked each time `main` moves. `enforce_admins` is on so the rules also bind the agent's own token, which has admin rights.
+- Documentation and settings only: no code changed, so test-first does not apply. The rule set was read back with `gh api repos/adam-riffi/kanri/branches/main/protection`.
+
+**Open questions and next steps**
+- Next: the local Supabase stack, Python tooling and the dbt skeleton, each as its own pull request. The owner creates the Supabase project and hands over the tokens; they must stay out of the repository, the chat and the logs.
+- Feature work still waits for the missing specification tabs.
+
 ## 2026-10-01 - GitHub Copilot - test/11-playwright-smoke (#12)
 
 **Changes**
