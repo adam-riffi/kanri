@@ -3,6 +3,22 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-09-30 - GitHub Copilot - feat/3-web-health-endpoint (#7)
+
+**Changes**
+- Added `apps/web` (Next.js 16, App Router, TypeScript, Tailwind CSS) with a placeholder home page, and `GET /api/v1/health` (written test-first) backed by `healthResponseSchema`.
+
+**Scope changes and decisions**
+- The scaffold was reduced to the minimum: no sample assets, no Google fonts (the build would need network access), no component kit (open decision) and no linter config (Biome runs at the root).
+- The layout uses an explicit `ReactNode` prop type instead of the generated `LayoutProps`, so `pnpm typecheck` passes before `next build` has generated types.
+- `next-env.d.ts` is generated and ignored; the `@/*` import alias was dropped because nothing uses it.
+- TypeScript 7 works with Next.js 16.3.7 (`next build` passes), so no build-time type check is bypassed.
+- `create-next-app` does not create missing parent folders: create `apps/` first.
+
+**Open questions and next steps**
+- Next: #4 (OpenAPI document and typed client from Zod).
+- Decide the component kit and visual direction (open decision) before building screens.
+
 ## 2026-09-30 - GitHub Copilot - chore/2-ts-tooling-ci (#6)
 
 **Changes**
