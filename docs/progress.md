@@ -2,6 +2,11 @@
 
 Project change log, newest entry first. Every pull request adds one entry.
 
+## 2026-09-30 - #7
+
+- **What changed:** Next.js app in `apps/web` with a placeholder home page and `GET /api/v1/health`.
+- **Scope changes:** none.
+
 ## 2026-09-30 - #6
 
 - **What changed:** TypeScript workspace, strict base config, Biome, Vitest, CI and the first domain rule (`healthResponseSchema`).
