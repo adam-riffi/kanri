@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { buildOpenApiDocument } from "./openapi.ts";
 
@@ -10,5 +11,13 @@ describe("buildOpenApiDocument", () => {
         "application/json": { schema: { $ref: "#/components/schemas/HealthResponse" } },
       },
     });
+  });
+
+  it("matches the committed openapi.json", () => {
+    const committed: unknown = JSON.parse(
+      readFileSync(new URL("../openapi.json", import.meta.url), "utf8"),
+    );
+
+    expect(buildOpenApiDocument()).toEqual(committed);
   });
 });
