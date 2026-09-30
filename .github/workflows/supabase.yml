@@ -1,0 +1,44 @@
+name: Supabase
+
+on:
+  pull_request:
+    paths:
+      - supabase/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/supabase.yml
+  push:
+    branches: [main]
+    paths:
+      - supabase/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/supabase.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migrations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Start the local database
+        run: pnpm exec supabase db start
+      - name: Apply the migrations and seed to a clean database
+        run: pnpm exec supabase db reset
+      - name: Lint the schema
+        run: pnpm exec supabase db lint --local --fail-on error
