@@ -1,0 +1,20 @@
+{
+  "name": "kanri",
+  "private": true,
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": ">=24.13.0"
+  },
+  "scripts": {
+    "check": "biome ci .",
+    "format": "biome format --write .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "build": "pnpm -r --if-present build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "typescript": "7.0.2",
+    "vitest": "5.0.2"
+  }
+}

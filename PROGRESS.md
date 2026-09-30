@@ -3,6 +3,23 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-09-30 - GitHub Copilot - chore/2-ts-tooling-ci (#6)
+
+**Changes**
+- Added the pnpm workspace, strict TypeScript base config, Biome, Vitest and `packages/domain` with its first rule, `healthResponseSchema` (written test-first).
+- Added CI: one `typescript` job (frozen install, check, typecheck, test, build) on every pull request and on pushes to `main`.
+
+**Scope changes and decisions**
+- Every tool version is pinned exactly (pnpm 12.8.1, Node 24.13.0, TypeScript 7.0.2, Vitest 5.0.2, Biome 2.5.14, Zod 4.6.5), so updates are explicit and reviewable.
+- The `pull_request` trigger has no branch filter, so stacked pull requests are checked even though they do not target `main`.
+- Tools are root dev dependencies shared by all packages; packages declare only their own runtime dependencies.
+- The editor on this machine writes CRLF: run `pnpm format` (Biome, LF) before committing; `.gitattributes` keeps LF in git.
+- Biome 2.5 deprecates `recommended`, so the config uses `preset: "recommended"`.
+
+**Open questions and next steps**
+- Next: #3 (Next.js app with health endpoint), then #4 (OpenAPI document and typed client).
+- After this PR merges, enable branch protection on `main` with `typescript` as a required check (not enabled yet; needs approval).
+
 ## 2026-09-30 - GitHub Copilot - chore/1-repo-foundation (#5)
 
 **Changes**
