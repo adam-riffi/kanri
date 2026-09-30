@@ -3,6 +3,19 @@
 Agent hand-off log shared by all agents. Newest entry first; earlier entries are never edited.
 Each entry: date, agent, branch or PR, changes made, scope changes and decisions (with reasons), open questions and next steps.
 
+## 2026-10-01 - GitHub Copilot - feat/4-openapi-client (#8)
+
+**Changes**
+- Each pull request description now shows a picture uploaded with `gh pr edit --attach`, so GitHub hosts it like a drag-and-drop attachment. Nothing is committed for it: `/PR/` stays git-ignored and the pull request template has no section for pictures.
+
+**Scope changes and decisions**
+- `--attach` exists from GitHub CLI 2.99.0 (the installed 2.95.0 answers "unknown flag"). A portable 2.102.0, verified against the release checksums and its build attestation, sits in `%LOCALAPPDATA%\gh-portable\bin` and is used only for attachments; the installed gh was not touched.
+- Two earlier attempts were removed: a side branch hosting the pictures (deleted) and pictures committed in the pull requests (commits dropped from the branches).
+
+**Open questions and next steps**
+- Upgrade the installed GitHub CLI (an MSI needs admin rights), then delete `%LOCALAPPDATA%\gh-portable`.
+- For a new picture: `gh pr create --attach 'PR/memes/<file>#<alt text>'` (or `gh pr edit <number> --attach ...`).
+
 ## 2026-09-30 - GitHub Copilot - feat/4-openapi-client (#8)
 
 **Changes**
